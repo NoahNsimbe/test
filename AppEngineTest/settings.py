@@ -68,6 +68,12 @@ else:
             'NAME': 'app_engine_test',
         }
     }
+    
+if 'test' in sys.argv:
+    DATABASES['default'] = {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'test_app-engine-test'
+    }
 
 AUTH_PASSWORD_VALIDATORS = [
     {
