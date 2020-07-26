@@ -50,12 +50,8 @@ WSGI_APPLICATION = 'AppEngineTest.wsgi.application'
 
 if DEBUG:
     DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': 'test_app-engine-test'
-        },
         
-        'default_two': {
+        'default': {
             'ENGINE': 'django.db.backends.mysql',
             'HOST': '127.0.0.1',
             'USER': 'app-engine-test',
@@ -74,11 +70,11 @@ else:
         }
     }
     
-# if 'test' in sys.argv:
-#     DATABASES['default'] = {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': 'test_app-engine-test'
-#     }
+if 'test' in sys.argv:
+    DATABASES['default'] = {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'test_app-engine-test'
+    }
 
 AUTH_PASSWORD_VALIDATORS = [
     {
