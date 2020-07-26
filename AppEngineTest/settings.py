@@ -1,5 +1,6 @@
 
 import os
+import sys
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -73,7 +74,7 @@ else:
 if 'test' in sys.argv:
     DATABASES['default'] = {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'test_app-engine-test'
+        'NAME': 'testappenginetest'
     }
 
 AUTH_PASSWORD_VALIDATORS = [
