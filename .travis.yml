@@ -2,13 +2,12 @@ dist: bionic
 language: python
 sudo: required
 python:
- - '3.8'
+- '3.8'
 services:
 - mysql
 - docker
 env:
-- DJANGO=3.0 DB=mysql DEBUG=True
-
+- DJANGO=3.0 DB=mysql
 before_install:
 - openssl aes-256-cbc -K $encrypted_77e6e08a37ba_key -iv $encrypted_77e6e08a37ba_iv
   -in client-secret.json.enc -out client-secret.json -d
@@ -20,7 +19,5 @@ script:
 - python manage.py test
 deploy:
   provider: gae
-  #project: career-track-project
   keyfile: client-secret.json
   on: master
-  
