@@ -20,7 +20,7 @@ script:
 - python manage.py test
 deploy:
   provider: gae
-  project: career-track-project
+  #project: career-track-project
   keyfile: client-secret.json
   on: master
   
