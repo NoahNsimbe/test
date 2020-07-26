@@ -1,11 +1,12 @@
 
 import os
+import sys
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = os.getenv("SECRET_KEY", "21b6%r1x@h2k!z_hulql=04zl)m9qt6_g)yggepr#s)=1*69=a")
 
-DEBUG = False
+DEBUG = os.getenv("DEBUG", False)
 
 ALLOWED_HOSTS = ['*']
 
@@ -50,6 +51,7 @@ WSGI_APPLICATION = 'AppEngineTest.wsgi.application'
 
 if DEBUG:
     DATABASES = {
+        
         'default': {
             'ENGINE': 'django.db.backends.mysql',
             'HOST': '127.0.0.1',
@@ -67,6 +69,12 @@ else:
             'PASSWORD': os.getenv("DB_PASSWORD", "app-engine-test"),
             'NAME': 'app_engine_test',
         }
+    }
+    
+if 'test' in sys.argv:
+    DATABASES['default'] = {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'testappenginetest'
     }
 
 AUTH_PASSWORD_VALIDATORS = [
