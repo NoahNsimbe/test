@@ -1,0 +1,27 @@
+dist: bionic
+language: python
+
+python:
+  - "3.8"
+
+services:
+  - mysql
+
+env:
+  - DJANGO=3.0 DB=mysql
+
+before_install:
+  - mysql -e 'DROP DATABASE IF EXISTS app_engine_test;'
+  - mysql -e 'CREATE DATABASE app_engine_test;'
+
+install:
+  - pip install -r requirements.txt
+
+script:
+  - python manage.py test
+
+deploy:
+  provider: gae
+  keyfile: "YOUR SERVICE ACCOUNT JSON FILE"
+  on: master
+
