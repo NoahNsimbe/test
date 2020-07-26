@@ -48,15 +48,26 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'AppEngineTest.wsgi.application'
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'HOST': '/cloudsql/[YOUR-CONNECTION-NAME]',
-        'USER': 'app_engine_test',
-        'PASSWORD': os.getenv("DB_PASSWORD", "app_engine_test"),
-        'NAME': 'app_engine_test',
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'HOST': '127.0.0.1',
+            'USER': 'app-engine-test',
+            'PASSWORD': os.getenv("DB_PASSWORD", "app-engine-test"),
+            'NAME': 'app_engine_test',
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'HOST': '/cloudsql/career-track-project:us-central1:app-engine-test',
+            'USER': 'app-engine-test',
+            'PASSWORD': os.getenv("DB_PASSWORD", "app-engine-test"),
+            'NAME': 'app_engine_test',
+        }
+    }
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -86,3 +97,8 @@ USE_TZ = True
 
 STATIC_ROOT = 'static'
 STATIC_URL = '/static/'
+
+if not DEBUG:
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
