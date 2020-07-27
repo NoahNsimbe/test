@@ -1,18 +1,18 @@
 dist: bionic
 language: python
-sudo: required
+# sudo: required
 python:
 - '3.8'
 services:
 - mysql
-- docker
+# - docker
 env:
 - DJANGO=3.0 DB=mysql
 before_install:
 - openssl aes-256-cbc -K $encrypted_77e6e08a37ba_key -iv $encrypted_77e6e08a37ba_iv
   -in client-secret.json.enc -out client-secret.json -d
-- mysql -e 'DROP DATABASE IF EXISTS app_engine_test;'
-- mysql -e 'CREATE DATABASE app_engine_test;'
+# - mysql -e 'DROP DATABASE IF EXISTS app_engine_test;'
+# - mysql -e 'CREATE DATABASE app_engine_test;'
 install:
 - pip install -r requirements.txt
 script:
