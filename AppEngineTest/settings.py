@@ -107,6 +107,6 @@ STATIC_ROOT = 'static'
 STATIC_URL = '/static/'
 
 if not DEBUG:
-    SECURE_SSL_REDIRECT = True
+    # SECURE_SSL_REDIRECT = True
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
