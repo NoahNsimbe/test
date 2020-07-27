@@ -1,12 +1,18 @@
-
 import os
 import sys
+from dotenv import load_dotenv
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-SECRET_KEY = os.getenv("SECRET_KEY", "21b6%r1x@h2k!z_hulql=04zl)m9qt6_g)yggepr#s)=1*69=a")
+ENVIRONMENT = os.getenv("ENVIRONMENT", "DEVELOPMENT")
 
-DEBUG = os.getenv("DEBUG", False)
+DEBUG = True if ENVIRONMENT == "DEVELOPMENT" else False
+
+if not DEBUG:
+    env_path = os.path.join(os.path.dirname(__file__), '.env_prod')
+    load_dotenv(env_path)
+
+SECRET_KEY = "21b6%r1x@h2k!z_hulql=04zl)m9qt6_g)yggepr#s)=1*69=a" if DEBUG else os.getenv("SECRET_KEY")
 
 ALLOWED_HOSTS = ['*']
 
@@ -64,17 +70,23 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'HOST': '/cloudsql/career-track-project:us-central1:app-engine-test',
-            'USER': 'app-engine-test',
-            'PASSWORD': os.getenv("DB_PASSWORD", "app-engine-test"),
-            'NAME': 'app_engine_test',
+            'OPTIONS': {
+                'init_command': 'SET default_storage_engine=INNODB',
+                'sql_mode': 'STRICT_TRANS_TABLES',
+                'isolation_level': 'read committed'
+            },
+            'HOST': os.getenv("DATABASE_HOST"),
+            'USER': os.getenv("DATABASE_USER"),
+            'PASSWORD': os.getenv("DATABASE_PASSWORD"),
+            'NAME': os.getenv("DATABASE_NAME"),
+            'PORT': os.environ.get('DATABASE_HOST_PORT'),
         }
     }
     
 if 'test' in sys.argv:
     DATABASES['default'] = {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'testappenginetest'
+        'NAME': 'test_db'
     }
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -107,6 +119,5 @@ STATIC_ROOT = 'static'
 STATIC_URL = '/static/'
 
 if not DEBUG:
-    # SECURE_SSL_REDIRECT = True
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
