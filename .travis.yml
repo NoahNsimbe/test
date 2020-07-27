@@ -12,6 +12,7 @@ before_deploy:
 - tar xvf secrets.tar
 deploy:
   provider: gae
+  skip_cleanup: true
   keyfile: client-secret.json
   project: career-track-project
   on:
