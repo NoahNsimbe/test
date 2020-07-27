@@ -20,4 +20,5 @@ script:
 deploy:
   provider: gae
   keyfile: client-secret.json
+  project: "career-track-project"
   on: master
