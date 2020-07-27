@@ -89,3 +89,4 @@ db.sqlite3
 client-secret.json
 .idea/*
 secrets.tar
+.env_prod
