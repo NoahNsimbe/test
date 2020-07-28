@@ -122,16 +122,14 @@ if DEBUG:
     MEDIA_ROOT = 'media/'
 
 else:
-
-    # DEFAULT_FILE_STORAGE = 'professers_api.gcloud.GoogleCloudMediaFileStorage'
     DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
-    GS_MEDIA_BUCKET_NAME = 'candidates_media'
-    MEDIA_URL = 'https://storage.googleapis.com/{}/'.format(GS_MEDIA_BUCKET_NAME)
+    GS_BUCKET_NAME = 'candidates_media'
+    MEDIA_URL = 'https://storage.googleapis.com/{}/'.format(GS_BUCKET_NAME)
     MEDIA_ROOT = 'media/'
 
 STATIC_ROOT = 'static'
 STATIC_URL = '/static/'
 
-if not DEBUG:
-    SESSION_COOKIE_SECURE = True
-    CSRF_COOKIE_SECURE = True
+# if not DEBUG:
+#     SESSION_COOKIE_SECURE = True
+#     CSRF_COOKIE_SECURE = True
