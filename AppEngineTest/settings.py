@@ -23,6 +23,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'polls.apps.PollsConfig',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
@@ -114,6 +116,11 @@ USE_L10N = True
 
 USE_TZ = True
 
+# DEFAULT_FILE_STORAGE = 'professers_api.gcloud.GoogleCloudMediaFileStorage'
+DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
+GS_MEDIA_BUCKET_NAME = 'candidates_media'
+MEDIA_URL = 'https://storage.googleapis.com/{}/'.format(GS_MEDIA_BUCKET_NAME)
+MEDIA_ROOT = "media/"
 
 STATIC_ROOT = 'static'
 STATIC_URL = '/static/'
