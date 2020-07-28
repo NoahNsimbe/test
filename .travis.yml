@@ -10,6 +10,7 @@ before_deploy:
 - openssl aes-256-cbc -K $encrypted_77e6e08a37ba_key -iv $encrypted_77e6e08a37ba_iv
   -in secrets.tar.enc -out secrets.tar -d
 - tar xvf secrets.tar
+- python manage.py collectstatic --no-input
 deploy:
   provider: gae
   skip_cleanup: true
