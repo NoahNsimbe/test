@@ -118,16 +118,15 @@ USE_TZ = True
 
 if DEBUG:
 
-    MEDIA_URL = '/media/'
-    MEDIA_ROOT = 'media/'
+    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = os.path.join(BASE_DIR + '/storage.json')
+    DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
+    GS_BUCKET_NAME = 'candidates_media'
+    MEDIA_URL = 'https://storage.googleapis.com/{}/'.format(GS_BUCKET_NAME)
 
 else:
-
-    # DEFAULT_FILE_STORAGE = 'professers_api.gcloud.GoogleCloudMediaFileStorage'
     DEFAULT_FILE_STORAGE = 'storages.backends.gcloud.GoogleCloudStorage'
-    GS_MEDIA_BUCKET_NAME = 'candidates_media'
-    MEDIA_URL = 'https://storage.googleapis.com/{}/'.format(GS_MEDIA_BUCKET_NAME)
-    MEDIA_ROOT = 'media/'
+    GS_BUCKET_NAME = 'candidates_media'
+    MEDIA_URL = 'https://storage.googleapis.com/{}/'.format(GS_BUCKET_NAME)
 
 STATIC_ROOT = 'static'
 STATIC_URL = '/static/'
