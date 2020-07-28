@@ -90,3 +90,4 @@ client-secret.json
 .idea/*
 secrets.tar
 .env_prod
+storage.json

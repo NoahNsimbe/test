@@ -1,3 +1,14 @@
-from django.shortcuts import render
+from polls.models import Candidates
+from rest_framework import viewsets, serializers
 
-# Create your views here.
+
+class SerializerClass(serializers.HyperlinkedModelSerializer):
+
+    class Meta:
+        model = Candidates
+        fields = ('url', 'id', 'firstName', 'lastName', 'image')
+
+
+class CandidatesViewSet(viewsets.ModelViewSet):
+    serializer_class = SerializerClass
+    queryset = Candidates.objects.all()
